@@ -1,0 +1,4 @@
+load './images/bbt.jpg' as bbt
+apply blur to bbt
+show bbt
+
