@@ -1,8 +1,5 @@
 load './images/bbt.jpg' as bbt
 load './images/0a_cat.bmp' as cat
-apply blur with 50 to bbt
-apply draw using cat with 50, 20 to bbt
-apply brighten with 50 to bbt
-apply gray with 50 to bbt
+apply crop with 200, 200 to bbt
 show bbt
 

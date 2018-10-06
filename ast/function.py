@@ -74,13 +74,28 @@ class FUNCTION(node.Node):
             st.symbol_table[self.to_variable] = img
 
         if self.func_name == 'resize':
-            pass
+            img = st.symbol_table[self.to_variable]
+            if type(self.parameters) is int:
+                x, y = img.shape[:2]
+                x, y = x * self.parameters // 100, y * self.parameters // 100
+            else:
+                x, y = self.parameters
+
+            img = cv2.resize(img, (x, y), interpolation=cv2.INTER_CUBIC)
+            st.symbol_table[self.to_variable] = img
 
         if self.func_name == 'find':
             pass
 
         if self.func_name == 'crop':
-            pass
+            img = st.symbol_table[self.to_variable]
+            if type(self.parameters) is int:
+                raise Exception('Cannot crop with only one argument')
+            x, y = self.parameters
+            width, height = img.shape[:2]
+            x0, x1, y0, y1 = width // 2 - x // 2, width // 2 + x // 2, height // 2 - y // 2, height // 2 + y // 2
+            img = img[x0:x1, y0:y1]
+            st.symbol_table[self.to_variable] = img
 
         if self.func_name == 'tile':
             pass
