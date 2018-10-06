@@ -1,5 +1,4 @@
 load './images/bbt.jpg' as bbt
 load './images/0a_cat.bmp' as cat
-apply crop with 200, 200 to bbt
+apply brighten with 400 to bbt
 show bbt
-
