@@ -1,4 +1,5 @@
 load './images/bbt.jpg' as bbt
-apply blur to bbt
+apply blur with 50 to bbt
+apply draw using cat with 50, 50 to bbt
 show bbt
 

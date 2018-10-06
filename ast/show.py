@@ -2,7 +2,6 @@ from libs.node import Node
 
 
 class SHOW(Node):
-
     variable = None
 
     def parse(self, tokenizer):
