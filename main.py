@@ -11,6 +11,6 @@ if __name__ == '__main__':
     literals = literals + functions
     tokenizer = Tokenizer('input.cvdsl', literals)
     tokenizer.tokenize()
-    program = PROGRAM(tokenizer=tokenizer)
-    program.parse()
-    program.evaluate()
+    # program = PROGRAM(tokenizer=tokenizer)
+    # program.parse()
+    # program.evaluate()

@@ -1,8 +1,3 @@
-import re # Python regex library
-from operator import add
-from functools import reduce
-
-
 class Tokenizer:
     tokens = []
     cur = None
@@ -19,17 +14,7 @@ class Tokenizer:
         Tokenize the input text
         :return:
         """
-        # Split array into tokens by spaces
-        self.tokens = [x.split(' ') for x in self.file]
-        # Flatten array using reduce and list concat
-        self.tokens = reduce(add, self.tokens)
-
-    def check_next(self):
-        """
-        Returns a copy of the current index in the tokens
-        :return:
-        """
-        return self.tokens[self.cur]
+        self.tokens = [word for line in self.file for word in line.split() if word]
 
     def get_next(self):
         """
@@ -40,24 +25,26 @@ class Tokenizer:
         self.cur += 1
         return ret
 
-    def check_token(self, regex):
+    def check_next(self, token):
         """
         Checks that the token matches the regex
-        :param regex:
+        :param token:
         :return: boolean
         """
-        return self.tokens[self.cur] is regex
+        return self.tokens[self.cur] == token
 
-    def get_and_check_next(self, regex):
+    def get_and_check_next(self, token):
         """
         Gets the next token and checks if it matches the regex
-        :param regex:
+        :param token:
         :return: string
         """
-        ret = False
-        if self.check_token(regex):
+        ret = ""
+
+        if self.check_next(token):
+            ret = self.tokens[self.cur]
             self.cur += 1
-            ret = True
+
         return ret
 
     def is_empty(self):
@@ -65,4 +52,4 @@ class Tokenizer:
         Checks if the tokenizer is empty
         :return: boolean
         """
-        return self.cur >= len(self.tokens) - 1
+        return self.cur >= len(self.tokens)
