@@ -1,0 +1,13 @@
+PROGRAM ::= {<load> | <apply> | <save>}*
+
+<load> ::= 'load' <path> 'as' <variable>
+<path> ::= <string>
+<variable> ::= <string>
+<save> ::= 'save' <variable> 'as' <variable>
+<apply> ::= 'apply' <function> {'as' <variable>}?
+
+<function> ::= <function_name> {'using' <variable>}? 'with' <parameter> 'to' <variable>
+<parameter> ::= <percentage> | <coordinate>
+<percentage> ::= <int>
+<coordinate> ::= <int> ', ' <int>
+<function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur'

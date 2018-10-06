@@ -4,7 +4,12 @@ import cv2
 
 class FUNCTION(node.Node):
 
-    def parse(self):
+    func_name = None
+    using_variable = None
+    parameters = None
+    to_variable = None
+
+    def parse(self, tokenizer):
         pass
 
     def evaluate(self):
