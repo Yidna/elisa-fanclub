@@ -24,4 +24,5 @@ class PROGRAM:
                 raise Exception('Unable to parse')
 
     def evaluate(self):
-        map(lambda x: x.evaluate(), self.nodes)
+        for node in self.nodes:
+            node.evaluate()

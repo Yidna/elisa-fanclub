@@ -1,4 +1,5 @@
 from libs import node
+from libs import symbol_table as st
 
 import cv2
 import os
@@ -14,7 +15,7 @@ class LOAD(node.Node):
         :return:
         """
         tokenizer.get_and_check_next('load')
-        self.path = tokenizer.get_next()
+        self.path = tokenizer.get_next().strip('\'\'')
         tokenizer.get_and_check_next('as')
         self.variable = tokenizer.get_next()
         print(self.path, self.variable)
@@ -24,7 +25,10 @@ class LOAD(node.Node):
         Evaluates the load node
         :return:
         """
+        print('current dir')
+        print(os.path.join(os.getcwd(), self.path))
         if os.path.exists(self.path):
-            pass
+            img = cv2.imread(self.path)
+            st.symbol_table[self.variable] = img
         else:
             raise Exception('Cannot find file path: {}'.format(self.path))

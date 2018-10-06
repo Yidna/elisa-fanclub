@@ -1,5 +1,6 @@
 from libs import node
 from ast.function import FUNCTION
+from libs import symbol_table as st
 import cv2
 
 
@@ -15,4 +16,6 @@ class APPLY(node.Node):
             self.variable = tokenizer.get_next()
 
     def evaluate(self):
-        pass
+        img = self.func.evaluate()
+        if self.variable:
+            st.symbol_table[self.variable] = img

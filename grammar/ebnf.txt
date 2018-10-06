@@ -10,4 +10,4 @@ PROGRAM ::= {<load> | <apply> | <save>}*
 <parameter> ::= <percentage> | <coordinate>
 <percentage> ::= <int>
 <coordinate> ::= <int> ', ' <int>
-<function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur'
+<function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur' | 'gray'
