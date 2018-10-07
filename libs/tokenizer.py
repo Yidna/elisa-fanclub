@@ -1,3 +1,6 @@
+from functionality.exceptions import IllegalInputException
+
+
 class Tokenizer:
     tokens = []
     cur = None
@@ -17,6 +20,8 @@ class Tokenizer:
         print(self.tokens)
 
     def peek(self):
+        if self.is_empty():
+            raise Exception("Reached end of token buffer.")
         return self.tokens[self.cur]
 
     def check_next(self, literal):
@@ -32,9 +37,7 @@ class Tokenizer:
         Consume and return the next token.
         :return: str
         """
-        if self.is_empty():
-            raise Exception("Reached end of token buffer.")
-        ret = self.tokens[self.cur]
+        ret = self.peek()
         self.cur += 1
         return ret
 
@@ -53,7 +56,7 @@ class Tokenizer:
         :return: str
         """
         if not self.check_next(literal):
-            raise Exception("Invalid token: expected {}, actual {}".format(literal, self.peek()))
+            raise IllegalInputException("Invalid token: expected {}, actual {}".format(literal, self.peek()))
         return self.get_next()
 
     def is_empty(self):

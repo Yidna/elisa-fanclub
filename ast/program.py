@@ -2,6 +2,7 @@ from ast.load import LOAD
 from ast.apply import APPLY
 from ast.show import SHOW
 from ast.save import SAVE
+from functionality.exceptions import IllegalInputException
 
 
 class PROGRAM:
@@ -20,7 +21,7 @@ class PROGRAM:
             elif self.tokenizer.check_next('save'):
                 node = SAVE()
             else:
-                raise Exception('Unsupported program statement type: ' + self.tokenizer.peek())
+                raise IllegalInputException('Unsupported program statement type: ' + self.tokenizer.peek())
 
             node.parse(self.tokenizer)
             self.nodes.append(node)

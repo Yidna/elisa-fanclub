@@ -1,4 +1,5 @@
 from functionality import *
+from functionality.exceptions import IllegalInputException
 from libs import node
 from libs import symbol_table as st
 
@@ -31,7 +32,7 @@ class FUNCTION(node.Node):
             param_1 = tokenizer.get_next()
             if param_1[-1] == ',':
                 if tokenizer.peek() == 'to':
-                    raise Exception('Expected a second argument after ","')
+                    raise IllegalInputException('Expected a second argument after ","')
                 self.parameters = (param_1[:-1], tokenizer.get_next())
             elif ',' in param_1:
                 self.parameters = (param_1.split(','))
@@ -39,10 +40,6 @@ class FUNCTION(node.Node):
                 self.parameters = (param_1,)
         else:
             self.parameters = ()
-
-        for p in self.parameters:
-            if not p.isnumeric():
-                raise Exception(p + " is an invalid argument.")
 
         tokenizer.get_and_check_next('to')
         self.to_variable = tokenizer.get_next()

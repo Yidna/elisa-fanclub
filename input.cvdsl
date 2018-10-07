@@ -5,4 +5,3 @@ apply darken with 50 to cat
 show cat
 apply draw using cat with 50, 50 to bbt as bbt
 show bbt
-save bbt as './images/saved_img.png'
