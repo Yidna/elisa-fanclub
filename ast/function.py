@@ -29,13 +29,15 @@ class FUNCTION(node.Node):
         if tokenizer.get_and_check_next('using'):
             self.using_variable = tokenizer.get_next()
 
-        tokenizer.get_and_check_next('with')
-        param_1 = tokenizer.get_next()
-        if param_1[-1] == ',':
-            # self.parameters.extend([int(param_1[:-1]), int(tokenizer.get_next())])
-            self.parameters = (int(param_1[:-1]), int(tokenizer.get_next()))
+        if tokenizer.get_and_check_next('with'):
+            param_1 = tokenizer.get_next()
+            if param_1[-1] == ',':
+                # self.parameters.extend([int(param_1[:-1]), int(tokenizer.get_next())])
+                self.parameters = (param_1[:-1], tokenizer.get_next())
+            else:
+                self.parameters = (param_1,)
         else:
-            self.parameters = (int(param_1),)
+            self.parameters = ()
 
         tokenizer.get_and_check_next('to')
         self.to_variable = tokenizer.get_next()
