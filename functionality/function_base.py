@@ -15,7 +15,7 @@ class FunctionBase(ABSTRACT_CLASS):
         self._parameters = parameters
         self._param_length = 0
 
-    def _parameters_valid(self):
+    def _check_parameters(self):
         """
         Ensures that the parameters are valid before executing the function.
         Throws an InvalidParameterLengthException if there as an incorrect number of parameters
@@ -40,5 +40,5 @@ class FunctionBase(ABSTRACT_CLASS):
         Executes the function after verifying the parameters are correct
         :return: anything
         """
-        self._parameters_valid()
+        self._check_parameters()
         self._run()

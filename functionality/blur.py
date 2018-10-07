@@ -9,8 +9,8 @@ class Blur(FunctionBase):
         super(Blur, self).__init__(symbol_table, parameters)
         self._param_length = 2
 
-    def _parameters_valid(self):
-        super(Blur, self)._parameters_valid()
+    def _check_parameters(self):
+        super(Blur, self)._check_parameters()
 
         # Check if the image exists
         if self._parameters[0] in self._symbol_table:
