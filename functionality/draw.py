@@ -20,5 +20,4 @@ class Draw(FunctionBase):
             t_img[x:x + x_offset, y:y + y_offset] = u_img
             img = t_img
 
-        self._symbol_table[t_img_name] = img
         return img

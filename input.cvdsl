@@ -1,8 +1,10 @@
 load './images/bbt.jpg' as bbt
 load './images/0a_cat.bmp' as cat
 show cat
-apply darken with 50 to cat
+apply darken with 50 to cat as tempcat
 show cat
-apply draw using cat with 50, 50 to bbt as bbt
+show tempcat
+apply draw using tempcat with 50, 50 to bbt as tempbbt
 show bbt
-save bbt as './images/saved_img.png'
+show tempbbt
+save tempbbt as './images/saved_img.png'

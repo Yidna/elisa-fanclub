@@ -19,5 +19,5 @@ class Resize(FunctionBase):
         y, x = img.shape[:2]
         x, y = x * x_scale // 100, y * y_scale // 100
         img = cv2.resize(img, (x, y), interpolation=cv2.INTER_CUBIC)
-        self._symbol_table[img_name] = img
+
         return img

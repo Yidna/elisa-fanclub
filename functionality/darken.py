@@ -24,7 +24,7 @@ class Darken(FunctionBase):
             darken = 100
         img = self._symbol_table[img_name]
         img = self.adjust_gamma(img, gamma=np.abs(darken/100 - 1))
-        self._symbol_table[img_name] = img
+
         return img
 
     def adjust_gamma(self, img, gamma=1.0):
