@@ -11,7 +11,7 @@ class Blur(FunctionBase):
         }
 
     def _run(self):
-        img_name = str(self._parameters[0])
+        img_name = self._parameters[0]
         x = self._parameters[1]
         y = self._parameters[2]
         img = self._symbol_table[img_name]

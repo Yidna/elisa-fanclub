@@ -10,8 +10,8 @@ class Draw(FunctionBase):
         }
 
     def _run(self):
-        u_img_name = str(self._parameters[0])
-        t_img_name = str(self._parameters[1])
+        u_img_name = self._parameters[0]
+        t_img_name = self._parameters[1]
         x = self._parameters[2]
         y = self._parameters[3]
         u_img = self._symbol_table[u_img_name]

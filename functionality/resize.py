@@ -12,7 +12,7 @@ class Resize(FunctionBase):
         }
 
     def _run(self):
-        img_name = str(self._parameters[0])
+        img_name = self._parameters[0]
         x_scale = self._parameters[1]
         y_scale = self._parameters[2] if len(self._parameters) == 2 else x_scale
         img = self._symbol_table[img_name]

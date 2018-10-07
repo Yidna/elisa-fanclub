@@ -11,7 +11,7 @@ class Brighten(FunctionBase):
         }
 
     def _run(self):
-        img_name = str(self._parameters[0])
+        img_name = self._parameters[0]
         amount = self._parameters[1]
         img = self._symbol_table[img_name]
 
