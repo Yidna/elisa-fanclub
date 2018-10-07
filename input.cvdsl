@@ -1,4 +1,5 @@
 load './images/bbt.jpg' as bbt
 load './images/0a_cat.bmp' as cat
-apply brighten with 400 to bbt
+show cat
+apply draw using cat with 50, 50 to bbt as bbt
 show bbt

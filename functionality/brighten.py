@@ -24,3 +24,4 @@ class Brighten(FunctionBase):
         final_hsv = cv2.merge((h, s, v))
         img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
         self._symbol_table[img_name] = img
+        return img

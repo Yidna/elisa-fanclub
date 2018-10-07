@@ -12,8 +12,6 @@ class Node(abstract_class):
         """
         pass
 
-
-
     @abstractmethod
     def evaluate(self):
         """

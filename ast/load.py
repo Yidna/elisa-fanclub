@@ -25,8 +25,6 @@ class LOAD(node.Node):
         Evaluates the load node
         :return:
         """
-        print('current dir')
-        print(os.path.join(os.getcwd(), self.path))
         if os.path.exists(self.path):
             img = cv2.imread(self.path)
             st.symbol_table[self.variable] = img

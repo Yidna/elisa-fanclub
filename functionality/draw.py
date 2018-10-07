@@ -25,3 +25,4 @@ class Draw(FunctionBase):
             img = t_img
 
         self._symbol_table[t_img_name] = img
+        return img

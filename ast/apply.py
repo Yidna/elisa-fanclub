@@ -1,8 +1,7 @@
 from libs import node
 from ast.function import FUNCTION
 from libs import symbol_table as st
-import cv2
-
+from matplotlib import pyplot as plt
 
 class APPLY(node.Node):
     func = None

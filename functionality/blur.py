@@ -18,3 +18,4 @@ class Blur(FunctionBase):
 
         img = cv2.GaussianBlur(img, (x, y), 0)
         self._symbol_table[img_name] = img
+        return img

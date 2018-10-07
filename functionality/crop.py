@@ -20,3 +20,4 @@ class Crop(FunctionBase):
         y0, y1 = img_h // 2 - h // 2, img_h // 2 + h // 2
         img = img[x0:x1, y0:y1]
         self._symbol_table[img_name] = img
+        return img

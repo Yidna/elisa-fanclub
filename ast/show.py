@@ -12,6 +12,7 @@ class SHOW(Node):
         self.variable = tokenizer.get_next()
 
     def evaluate(self):
+        print('The variable to show is {}'.format(self.variable))
         img = st.symbol_table[self.variable]
         if len(img.shape) == 3:
             plt.figure()
