@@ -32,8 +32,8 @@ class Crop(FunctionBase):
             raise InvalidParameterException(2, "Integer")
 
     def _run(self):
-        img_w, img_h = self.__image.shape[:2]
+        img_h, img_w = self.__image.shape[:2]
         x0, x1 = img_w // 2 - self.__w // 2, img_w // 2 + self.__w // 2
         y0, y1 = img_h // 2 - self.__h // 2, img_h // 2 + self.__h // 2
-        self.image = self.image[x0:x1, y0:y1]
-        self._symbol_table[self.__image_name] = self.image
+        self.__image = self.__image[x0:x1, y0:y1]
+        self._symbol_table[self.__image_name] = self.__image

@@ -6,9 +6,8 @@ tokenizer = None
 symbol_table = {}
 
 if __name__ == '__main__':
-    functions = ['darken', 'brighten', 'resize', 'find', 'draw', 'hybrid']
     literals = ['load', 'save', 'apply']
-    literals = literals + functions
+    literals = literals
     tokenizer = Tokenizer('input.cvdsl', literals)
     tokenizer.tokenize()
     program = PROGRAM(tokenizer=tokenizer)

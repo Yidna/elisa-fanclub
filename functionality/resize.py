@@ -27,7 +27,7 @@ class Resize(FunctionBase):
             raise InvalidParameterException(1, "[1, 2]-Integer Tuple")
 
     def _run(self):
-        x, y = self.__image.shape[:2]
+        y, x = self.__image.shape[:2]
         x, y = x * self.__x_scale // 100, y * self.__y_scale // 100
         self.__image = cv2.resize(self.__image, (x, y), interpolation=cv2.INTER_CUBIC)
         self._symbol_table[self.__image_name] = self.__image
