@@ -10,9 +10,14 @@ class Type(ABSTRACT_CLASS):
         self._value = value
 
     def check(self):
-        if not self._check:
+        if not self._check():
             raise InvalidParameterException(self._value, self.__class__.__name__)
+        return self._cast()
 
     @abstractmethod
     def _check(self):
+        pass
+
+    @abstractmethod
+    def _cast(self):
         pass

@@ -45,7 +45,7 @@ class FunctionBase(ABSTRACT_CLASS):
 
         # Check if the types of parameters are correct
         for i, p in enumerate(self._parameters):
-            self._param_def[param_len - 1][i](p).check()
+            self._parameters[i] = self._param_def[param_len][i](self._symbol_table, p).check()
 
     @abstractmethod
     def _run(self):
