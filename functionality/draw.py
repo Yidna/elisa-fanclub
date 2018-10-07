@@ -6,14 +6,10 @@ class Draw(FunctionBase):
 
     def _get_param_def(self):
         return {
-            4: (Image, Image, Integer, Integer)
+            (Image, Image, Integer, Integer): self._draw
         }
 
-    def _run(self):
-        u_img_name = self._parameters[0]
-        t_img_name = self._parameters[1]
-        x = self._parameters[2]
-        y = self._parameters[3]
+    def _draw(self, u_img_name, t_img_name, x, y):
         u_img = self._symbol_table[u_img_name]
         t_img = self._symbol_table[t_img_name]
 

@@ -7,14 +7,13 @@ class Resize(FunctionBase):
 
     def _get_param_def(self):
         return {
-            2: (Image, Integer),
-            3: (Image, Integer, Integer)
+            (Image, Integer): self._resize,
+            (Image, Integer, Integer): self._resize
         }
 
-    def _run(self):
-        img_name = self._parameters[0]
-        x_scale = self._parameters[1]
-        y_scale = self._parameters[2] if len(self._parameters) == 2 else x_scale
+    def _resize(self, img_name, x_scale, y_scale=None):
+        if y_scale is None:
+            y_scale = x_scale
         img = self._symbol_table[img_name]
 
         y, x = img.shape[:2]

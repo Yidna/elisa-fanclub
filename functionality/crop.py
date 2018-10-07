@@ -6,13 +6,10 @@ class Crop(FunctionBase):
 
     def _get_param_def(self):
         return {
-            3: (Image, Integer, Integer)
+            (Image, Integer, Integer): self._crop
         }
 
-    def _run(self):
-        img_name = self._parameters[0]
-        w = self._parameters[1]
-        h = self._parameters[2]
+    def _crop(self, img_name, w, h):
         img = self._symbol_table[img_name]
 
         img_h, img_w = img.shape[:2]

@@ -9,16 +9,15 @@ class Darken(FunctionBase):
 
     def _get_param_def(self):
         return {
-            2: (Image, Integer)
+            (Image, Integer): self._darken
         }
 
-    def _run(self):
+    def _darken(self, img_name, darken):
         """
         When we execute darken, we want to be able to adjust the gamma by 0 <= darken <= 100
         If user provides upper or lower bound we will adjust to the min and max
         :return:
         """
-        img_name, darken = self._parameters[0], self._parameters[1]
         if darken < 0:
             darken = 0
         if darken > 100:

@@ -7,12 +7,10 @@ class Brighten(FunctionBase):
 
     def _get_param_def(self):
         return {
-            2: (Image, Integer)
+            (Image, Integer): self._brighten
         }
 
-    def _run(self):
-        img_name = self._parameters[0]
-        amount = self._parameters[1]
+    def _brighten(self, img_name, amount):
         img = self._symbol_table[img_name]
 
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
