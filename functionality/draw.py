@@ -21,7 +21,7 @@ class Draw(FunctionBase):
 
         # Check if the to image exists
         if self._parameters[1] in self._symbol_table:
-            self.__to_image_name = str(self._parameters[0])
+            self.__to_image_name = str(self._parameters[1])
             self.__to_image = self._symbol_table[self.__to_image_name]
         else:
             raise InvalidParameterException(1, "Variable")
