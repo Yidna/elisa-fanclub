@@ -1,3 +1,6 @@
+import collections
+
+
 class Tokenizer:
     tokens = []
     cur = None
@@ -27,26 +30,29 @@ class Tokenizer:
         print("returned {}".format(ret))
         return ret
 
-    def check_next(self, token):
+    def check_next(self, regex):
         """
         Checks that the token matches the regex
-        :param token:
+        :param regex:
         :return: boolean
         """
-        return self.tokens[self.cur] == token
+        if isinstance(regex, collections.Iterable):
+            return self.tokens[self.cur] in regex
+        else:
+            return self.tokens[self.cur] == regex
 
-    def get_and_check_next(self, token):
+    def get_and_check_next(self, regex):
         """
         Gets the next token and checks if it matches the regex
-        :param token:
+        :param regex:
         :return: string
         """
         ret = ""
 
-        if self.check_next(token):
+        if self.check_next(regex):
             ret = self.tokens[self.cur]
             self.cur += 1
-        print("Checked {} against {}!".format(token, ret))
+        print("Checked {} against {}!".format(regex, ret))
         return ret
 
     def is_empty(self):
