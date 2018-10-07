@@ -1,10 +1,10 @@
 # CPSC 410 - DSL project for CPSC410 using OpenCV
-Group:
-Andy Siu
-Cindy Hsu
-Gavin Ham
-Gary Gao
-Ryan Lee
+Group:   
+Andy Siu  
+Cindy Hsu  
+Gavin Ham  
+Gary Gao   
+Ryan Lee   
 
 # To install packages
 ```python
