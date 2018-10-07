@@ -1,25 +1,30 @@
 from abc import ABC as ABSTRACT_CLASS
 from abc import abstractmethod
+from functionality.exceptions.invalid_parameter_length_exception import InvalidParameterLengthException
 
 
 class FunctionBase(ABSTRACT_CLASS):
 
-
-
-    @abstractmethod
-    def __init__(self, parameters):
+    def __init__(self, symbol_table, parameters):
         """
         Creates an instance of the function with the given parameters
+        :param symbol_table: the symbol table
         :param parameters: a tuple of parameters
         """
-        self.parameters = parameters
+        self._symbol_table = symbol_table
+        self._parameters = parameters
+        self._param_length = 0
 
-    @abstractmethod
     def _parameters_valid(self):
         """
-        Ensures that the parameters are valid before executing the function
-        :return: true or false
+        Ensures that the parameters are valid before executing the function.
+        Throws an InvalidParameterLengthException if there as an incorrect number of parameters
+        Throws an InvalidParameterException if parameters are not valid.
+        Loads parameters into private variables if needed.
         """
+        # Check if the number of parameters is correct
+        if self._parameters.length != self.__param_length:
+            raise InvalidParameterLengthException(self._param_length, self._parameters.length)
         pass
 
     @abstractmethod
@@ -35,9 +40,5 @@ class FunctionBase(ABSTRACT_CLASS):
         Executes the function after verifying the parameters are correct
         :return: anything
         """
-        if self._parameters_valid():
-            return self._run()
-        else:
-            raise Exception("Invalid parameters for executing: " + self.__class__.__name__)
-
-
+        self._parameters_valid()
+        self._run()
