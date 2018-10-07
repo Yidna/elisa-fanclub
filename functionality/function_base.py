@@ -23,8 +23,8 @@ class FunctionBase(ABSTRACT_CLASS):
         Loads parameters into private variables if needed.
         """
         # Check if the number of parameters is correct
-        if not(self._parameters.length in self._param_length):
-            raise InvalidParameterLengthException(self._param_length, self._parameters.length)
+        if not(len(self._parameters) in self._param_length):
+            raise InvalidParameterLengthException(len(self._parameters), self._parameters.length)
         pass
 
     @abstractmethod

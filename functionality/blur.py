@@ -21,7 +21,7 @@ class Blur(FunctionBase):
 
         # Check if parameters for the blur are valid
         param = self._parameters[1]
-        if isinstance(param, tuple) and param.length == 2 and all(isinstance(value, int) for value in param):
+        if isinstance(param, tuple) and len(param) == 2 and all(isinstance(value, int) for value in param):
             self.__filter = self._parameters[1]
         else:
             raise InvalidParameterException(1, "2-Integer Tuple")
