@@ -11,7 +11,7 @@ Ryan Lee
 pip install -r requirements.txt
 ```
 
-# To run a sample of our EBNF
+# To run a sample of our [EBNF](./grammer/ebnf.txt)
 ```
 python main.py
 ```
