@@ -31,4 +31,3 @@ class Blur(FunctionBase):
     def _run(self):
         self.__image = cv2.GaussianBlur(self.__image, self.__filter, 0)
         self._symbol_table[self.__image_name] = self.__image
-        pass
