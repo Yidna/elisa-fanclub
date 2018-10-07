@@ -1,6 +1,3 @@
-import collections
-
-
 class Tokenizer:
     tokens = []
     cur = None
@@ -13,50 +10,51 @@ class Tokenizer:
 
     def tokenize(self):
         """
-        Tokenize the input text
-        :return:
+        Split the input text into words and store in tokens.
+        :return: void
         """
         self.tokens = [word for line in self.file for word in line.split() if word]
         print(self.tokens)
 
+    def peek(self):
+        return self.tokens[self.cur]
+
+    def check_next(self, literal):
+        """
+        Determine whether the next token is valid.
+        :param literal: str | dict
+        :return: boolean
+        """
+        return (self.peek() in literal) if isinstance(literal, dict) else (self.peek() == literal)
+
     def get_next(self):
         """
-        Returns the next token
-        :return:
+        Consume and return the next token.
+        :return: str
         """
+        if self.is_empty():
+            raise Exception("Reached end of token buffer.")
         ret = self.tokens[self.cur]
         self.cur += 1
-        print("returned {}".format(ret))
         return ret
 
-    def check_next(self, regex):
+    def maybe_match_next(self, literal):
         """
-        Checks that the token matches the regex
-        :param regex:
+        Consume the next token only if it matches the given literal.
+        :param literal: str
         :return: boolean
         """
-        if isinstance(regex, collections.Iterable):
-            return self.tokens[self.cur] in regex
-        else:
-            return self.tokens[self.cur] == regex
+        return self.check_next(literal) and self.get_next()
 
-    def get_and_check_next(self, regex):
+    def get_and_check_next(self, literal):
         """
-        Gets the next token and checks if it matches the regex
-        :param regex:
-        :return: string
+        Consume the next token and verify it matches the literal.
+        :param literal: str | dict
+        :return: str
         """
-        ret = ""
-
-        if self.check_next(regex):
-            ret = self.tokens[self.cur]
-            self.cur += 1
-        print("Checked {} against {}!".format(regex, ret))
-        return ret
+        if not self.check_next(literal):
+            raise Exception("Invalid token: expected {}, actual {}".format(literal, self.peek()))
+        return self.get_next()
 
     def is_empty(self):
-        """
-        Checks if the tokenizer is empty
-        :return: boolean
-        """
         return self.cur >= len(self.tokens)
