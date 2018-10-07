@@ -7,7 +7,7 @@ class Crop(FunctionBase):
 
     def __init__(self, symbol_table, parameters):
         super(Crop, self).__init__(symbol_table, parameters)
-        self._param_length = 3
+        self._param_length = (3,)
 
     def _check_parameters(self):
         super(Crop, self)._check_parameters()

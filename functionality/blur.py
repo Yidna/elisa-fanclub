@@ -7,7 +7,7 @@ class Blur(FunctionBase):
 
     def __init__(self, symbol_table, parameters):
         super(Blur, self).__init__(symbol_table, parameters)
-        self._param_length = 2
+        self._param_length = (2,)
 
     def _check_parameters(self):
         super(Blur, self)._check_parameters()

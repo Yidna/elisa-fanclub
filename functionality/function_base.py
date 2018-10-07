@@ -13,7 +13,7 @@ class FunctionBase(ABSTRACT_CLASS):
         """
         self._symbol_table = symbol_table
         self._parameters = parameters
-        self._param_length = 0
+        self._param_length = (0,)
 
     def _check_parameters(self):
         """
@@ -23,7 +23,7 @@ class FunctionBase(ABSTRACT_CLASS):
         Loads parameters into private variables if needed.
         """
         # Check if the number of parameters is correct
-        if self._parameters.length != self.__param_length:
+        if not(self._parameters.length in self._param_length):
             raise InvalidParameterLengthException(self._param_length, self._parameters.length)
         pass
 

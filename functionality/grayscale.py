@@ -7,7 +7,7 @@ class Grayscale(FunctionBase):
 
     def __init__(self, symbol_table, parameters):
         super(Grayscale, self).__init__(symbol_table, parameters)
-        self._param_length = 1
+        self._param_length = (1,)
 
     def _check_parameters(self):
         super(Grayscale, self)._check_parameters()
