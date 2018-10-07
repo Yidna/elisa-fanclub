@@ -5,9 +5,8 @@ class Tokenizer:
     tokens = []
     cur = None
 
-    def __init__(self, file_path, literals):
+    def __init__(self, file_path):
         # Constructor
-        self.literals = literals
         self.cur = 0
         with open(file_path, 'r') as f:
             self.file = f.read().splitlines()
