@@ -22,6 +22,7 @@ class FUNCTION(node.Node):
 
     def parse(self, tokenizer):
         self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
+        print("Parsing " + self.func_name + "...")
 
         if tokenizer.maybe_match_next('using'):
             self.using_variable = tokenizer.get_next()
@@ -29,12 +30,19 @@ class FUNCTION(node.Node):
         if tokenizer.maybe_match_next('with'):
             param_1 = tokenizer.get_next()
             if param_1[-1] == ',':
-                # self.parameters.extend([int(param_1[:-1]), int(tokenizer.get_next())])
+                if tokenizer.peek() == 'to':
+                    raise Exception('Expected a second argument after ","')
                 self.parameters = (param_1[:-1], tokenizer.get_next())
+            elif ',' in param_1:
+                self.parameters = (param_1.split(','))
             else:
                 self.parameters = (param_1,)
         else:
             self.parameters = ()
+
+        for p in self.parameters:
+            if not p.isnumeric():
+                raise Exception(p + " is an invalid argument.")
 
         tokenizer.get_and_check_next('to')
         self.to_variable = tokenizer.get_next()

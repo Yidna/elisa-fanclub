@@ -32,6 +32,8 @@ class Tokenizer:
         Consume and return the next token.
         :return: str
         """
+        if self.is_empty():
+            raise Exception("Reached end of token buffer.")
         ret = self.tokens[self.cur]
         self.cur += 1
         return ret
