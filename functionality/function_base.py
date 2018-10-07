@@ -13,27 +13,7 @@ class FunctionBase(ABSTRACT_CLASS):
         """
         self._symbol_table = symbol_table
         self._parameters = parameters
-        self._param_length = (0,)
-
-    def _check_parameters(self):
-        """
-        Ensures that the parameters are valid before executing the function.
-        Throws an InvalidParameterLengthException if there as an incorrect number of parameters
-        Throws an InvalidParameterException if parameters are not valid.
-        Loads parameters into private variables if needed.
-        """
-        # Check if the number of parameters is correct
-        if not(len(self._parameters) in self._param_length):
-            raise InvalidParameterLengthException(self._param_length, len(self._parameters))
-        pass
-
-    @abstractmethod
-    def _run(self):
-        """
-        The implementation of the function
-        :return: anything
-        """
-        pass
+        self._param_def = self._get_param_def()
 
     def execute(self):
         """
@@ -42,3 +22,35 @@ class FunctionBase(ABSTRACT_CLASS):
         """
         self._check_parameters()
         return self._run()
+
+    def _get_param_def(self):
+        """
+        Generates the dictionary of {num_args: (typedefs)} for parameters
+        :return: dict
+        """
+        return {
+            0: ()
+        }
+
+    def _check_parameters(self):
+        """
+        Ensures that the parameters are valid before executing the function.
+        Throws an InvalidParameterLengthException if there as an incorrect number of parameters
+        Throws an InvalidParameterException if parameters are not valid.
+        """
+        # Check if the number of parameters is correct
+        param_len = len(self._parameters)
+        if not(param_len in self._param_def):
+            raise InvalidParameterLengthException(self._param_def, param_len)
+
+        # Check if the types of parameters are correct
+        for i, p in enumerate(self._parameters):
+            self._param_def[param_len - 1][i](p).check()
+
+    @abstractmethod
+    def _run(self):
+        """
+        The implementation of the function
+        :return: anything
+        """
+        pass
