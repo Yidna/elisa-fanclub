@@ -7,4 +7,4 @@ class Image(Type):
         return self._value in self._symbol_table
 
     def _cast(self):
-        return str(self._value)
+        return self._symbol_table[self._value].copy()
