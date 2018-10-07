@@ -1,7 +1,6 @@
-from libs import node
 from ast.function import FUNCTION
+from libs import node
 from libs import symbol_table as st
-import cv2
 
 
 class APPLY(node.Node):
@@ -12,7 +11,7 @@ class APPLY(node.Node):
         tokenizer.get_and_check_next('apply')
         self.func = FUNCTION()
         self.func.parse(tokenizer)
-        if tokenizer.get_and_check_next('as'):
+        if tokenizer.maybe_match_next('as'):
             self.variable = tokenizer.get_next()
 
     def evaluate(self):
