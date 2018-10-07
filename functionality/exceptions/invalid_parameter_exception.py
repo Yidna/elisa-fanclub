@@ -6,4 +6,4 @@ class InvalidParameterException(Exception):
         self.__expecting = expecting
 
     def __str__(self):
-        return "Invalid parameter #" + self.__offending_index + ": expecting a " + self.__expecting
+        return "Invalid parameter #{}: expecting a {}".format(self.__offending_index, self.__expecting)

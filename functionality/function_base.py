@@ -24,7 +24,7 @@ class FunctionBase(ABSTRACT_CLASS):
         """
         # Check if the number of parameters is correct
         if not(len(self._parameters) in self._param_length):
-            raise InvalidParameterLengthException(len(self._parameters), self._parameters.length)
+            raise InvalidParameterLengthException(self._param_length, len(self._parameters))
         pass
 
     @abstractmethod

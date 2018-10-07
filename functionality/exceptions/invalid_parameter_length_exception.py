@@ -6,4 +6,4 @@ class InvalidParameterLengthException(Exception):
         self.__actual_length = actual_length
 
     def __str__(self):
-        return "Invalid parameter count#" + self.__actual_length + ": expecting " + self.__expected_lengths
+        return "Invalid parameter count {}: expecting {}".format(self.__actual_length, self.__expected_lengths)
