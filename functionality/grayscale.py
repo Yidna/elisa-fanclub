@@ -10,7 +10,7 @@ class Grayscale(FunctionBase):
             (Image,): self._grayscale
         }
 
-    def _grayscale(self, img_name):
-        img = self._symbol_table[img_name]
+    def _grayscale(self, img):
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         return img

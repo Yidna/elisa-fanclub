@@ -9,10 +9,7 @@ class Draw(FunctionBase):
             (Image, Image, Integer, Integer): self._draw
         }
 
-    def _draw(self, u_img_name, t_img_name, x, y):
-        u_img = self._symbol_table[u_img_name]
-        t_img = self._symbol_table[t_img_name]
-
+    def _draw(self, u_img, t_img, x, y):
         if u_img.shape > t_img.shape:
             img = u_img
         else:

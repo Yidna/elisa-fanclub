@@ -10,9 +10,7 @@ class Blur(FunctionBase):
             (Image, Integer, Integer): self._blur
         }
 
-    def _blur(self, img_name, x, y):
-        img = self._symbol_table[img_name]
-
+    def _blur(self, img, x, y):
         img = cv2.GaussianBlur(img, (x, y), 0)
 
         return img

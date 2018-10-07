@@ -11,10 +11,9 @@ class Resize(FunctionBase):
             (Image, Integer, Integer): self._resize
         }
 
-    def _resize(self, img_name, x_scale, y_scale=None):
+    def _resize(self, img, x_scale, y_scale=None):
         if y_scale is None:
             y_scale = x_scale
-        img = self._symbol_table[img_name]
 
         y, x = img.shape[:2]
         x, y = x * x_scale // 100, y * y_scale // 100

@@ -9,9 +9,7 @@ class Crop(FunctionBase):
             (Image, Integer, Integer): self._crop
         }
 
-    def _crop(self, img_name, w, h):
-        img = self._symbol_table[img_name]
-
+    def _crop(self, img, w, h):
         img_h, img_w = img.shape[:2]
         x0, x1 = img_w // 2 - w // 2, img_w // 2 + w // 2
         y0, y1 = img_h // 2 - h // 2, img_h // 2 + h // 2

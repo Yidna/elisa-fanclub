@@ -10,9 +10,7 @@ class Brighten(FunctionBase):
             (Image, Integer): self._brighten
         }
 
-    def _brighten(self, img_name, amount):
-        img = self._symbol_table[img_name]
-
+    def _brighten(self, img, amount):
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         h, s, v = cv2.split(hsv)
         lim = 255 - amount
