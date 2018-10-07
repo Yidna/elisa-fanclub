@@ -1,9 +1,6 @@
+from functionality import *
 from libs import node
 from libs import symbol_table as st
-from functionality import *
-from scipy import signal
-import cv2
-import numpy as np
 
 
 class FUNCTION(node.Node):
@@ -25,19 +22,27 @@ class FUNCTION(node.Node):
 
     def parse(self, tokenizer):
         self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
+        print("Parsing " + self.func_name + "...")
 
-        if tokenizer.get_and_check_next('using'):
+        if tokenizer.maybe_match_next('using'):
             self.using_variable = tokenizer.get_next()
 
-        if tokenizer.get_and_check_next('with'):
+        if tokenizer.maybe_match_next('with'):
             param_1 = tokenizer.get_next()
             if param_1[-1] == ',':
-                # self.parameters.extend([int(param_1[:-1]), int(tokenizer.get_next())])
+                if tokenizer.peek() == 'to':
+                    raise Exception('Expected a second argument after ","')
                 self.parameters = (param_1[:-1], tokenizer.get_next())
+            elif ',' in param_1:
+                self.parameters = (param_1.split(','))
             else:
                 self.parameters = (param_1,)
         else:
             self.parameters = ()
+
+        for p in self.parameters:
+            if not p.isnumeric():
+                raise Exception(p + " is an invalid argument.")
 
         tokenizer.get_and_check_next('to')
         self.to_variable = tokenizer.get_next()

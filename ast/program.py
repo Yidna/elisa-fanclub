@@ -16,12 +16,11 @@ class PROGRAM:
                 node = APPLY()
             elif self.tokenizer.check_next('show'):
                 node = SHOW()
-
-            if node is not None:
-                node.parse(self.tokenizer)
-                self.nodes.append(node)
             else:
-                raise Exception('Unable to parse')
+                raise Exception('Unsupported program statement type: ' + self.tokenizer.peek())
+
+            node.parse(self.tokenizer)
+            self.nodes.append(node)
 
     def evaluate(self):
         for node in self.nodes:
