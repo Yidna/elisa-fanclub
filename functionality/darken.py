@@ -12,7 +12,7 @@ class Darken(FunctionBase):
     def _check_parameters(self):
         super(Darken, self)._check_parameters()
 
-        # Check if the exists
+        # Check if the image exists
         if self._parameters[0] in self._symbol_table:
             self.__image_name = str(self._parameters[0])
             self.__image = self._symbol_table[self.__image_name]
@@ -23,7 +23,7 @@ class Darken(FunctionBase):
         if isinstance(self._parameters[1], int):
             self.__amount = self._parameters[1]
         else:
-            raise InvalidParameterException(21, "Integer")
+            raise InvalidParameterException(1, "Integer")
 
     def _run(self):
         # TODO
