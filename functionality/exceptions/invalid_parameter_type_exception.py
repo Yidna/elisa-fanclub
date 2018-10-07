@@ -1,4 +1,4 @@
-class InvalidParameterException(Exception):
+class InvalidParameterTypeException(Exception):
     """Raised when parameters for a function are invalid"""
 
     def __init__(self, offending_value, expecting):

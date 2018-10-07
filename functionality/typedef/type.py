@@ -1,6 +1,6 @@
 from abc import ABC as ABSTRACT_CLASS
 from abc import abstractmethod
-from functionality.exceptions.invalid_parameter_exception import InvalidParameterException
+from functionality.exceptions.invalid_parameter_type_exception import InvalidParameterTypeException
 
 
 class Type(ABSTRACT_CLASS):
@@ -11,7 +11,7 @@ class Type(ABSTRACT_CLASS):
 
     def check(self):
         if not self._check():
-            raise InvalidParameterException(self._value, self.__class__.__name__)
+            raise InvalidParameterTypeException(self._value, self.__class__.__name__)
         return self._cast()
 
     @abstractmethod
