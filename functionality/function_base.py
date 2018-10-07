@@ -41,4 +41,4 @@ class FunctionBase(ABSTRACT_CLASS):
         :return: anything
         """
         self._check_parameters()
-        self._run()
+        return self._run()
