@@ -3,3 +3,4 @@ load './images/0a_cat.bmp' as cat
 show cat
 apply draw using cat with 50, 50 to bbt as bbt
 show bbt
+save bbt as './images/saved_img.png'

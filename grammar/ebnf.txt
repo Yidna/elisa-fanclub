@@ -1,9 +1,10 @@
-PROGRAM ::= {<load> | <apply> | <save>}*
+PROGRAM ::= {<load> | <apply> | <show> |  <save>}*
 
 <load> ::= 'load' <path> 'as' <variable>
 <path> ::= <string>
 <variable> ::= <string>
-<save> ::= 'save' <variable> 'as' <variable>
+<save> ::= 'save' <variable> 'as' <path>
+<show> ::= 'show' <variable>
 <apply> ::= 'apply' <function> {'as' <variable>}?
 
 <function> ::= <function_name> {'using' <variable>}? 'with' <parameter> 'to' <variable>

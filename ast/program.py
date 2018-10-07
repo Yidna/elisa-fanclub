@@ -1,6 +1,7 @@
 from ast.load import LOAD
 from ast.apply import APPLY
 from ast.show import SHOW
+from ast.save import SAVE
 
 
 class PROGRAM:
@@ -16,6 +17,8 @@ class PROGRAM:
                 node = APPLY()
             elif self.tokenizer.check_next('show'):
                 node = SHOW()
+            elif self.tokenizer.check_next('save'):
+                node = SAVE()
             else:
                 raise Exception('Unsupported program statement type: ' + self.tokenizer.peek())
 
