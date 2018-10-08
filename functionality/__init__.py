@@ -5,3 +5,4 @@ from functionality.brighten import Brighten
 from functionality.grayscale import Grayscale
 from functionality.resize import Resize
 from functionality.crop import Crop
+from functionality.tile import Tile

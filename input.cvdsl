@@ -9,3 +9,7 @@ record darken with 50, draw using bbt4 with 30, 30, resize with 10 as instagram
 apply darken with 30 to bbt,bbt2,bbt3,cat3 as a,b,c,d
 apply instagram to bbt, bbt2, cat as e,f,g
 show e
+apply tile with 3,5 to bbt,bbt2,bbt3,cat3 as a,b,c,d
+show bbt
+show a
+

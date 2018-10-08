@@ -20,7 +20,10 @@ class APPLY(node.Node):
         if tokenizer.peek() in pt.preset_table:
             self.preset_name = tokenizer.get_next()
         else:
-            self.func_name = tokenizer.get_and_check_next(ft.FUNC_TABLE)
+          try:
+            self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
+          except IllegalInputException:
+            raise IllegalInputException("Call to unsupported function '{}'.".format(tokenizer.peek()))
 
         print("Parsing " + self.func_name if self.func_name else self.preset_name + "...")
 
