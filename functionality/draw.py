@@ -10,7 +10,7 @@ class Draw(FunctionBase):
         }
 
     def _draw(self, u_img, t_img, x, y):
-        if u_img.shape > t_img.shape:
+        if u_img.shape >= t_img.shape:
             img = u_img
         else:
             x_offset, y_offset, _ = u_img.shape
