@@ -31,37 +31,41 @@ class FunctionBase:
             (): None
         }
 
+    def _param_def_to_str(self):
+        # To log possible param_defs.
+        res = ""
+        for t in self._param_def:
+            res += "("
+            for param_type in t:
+                if res[-1] is not "(":
+                    res += ", "
+                res += param_type.__name__
+            res += ") or "
+        return res[:-4]
+
+    def _maybe_cast_types(self, types):
+        maybe_casts = [expected_type(self._symbol_table, value) for expected_type, value in zip(types, self._parameters)]
+        if all([val.check() for val in maybe_casts]):
+            return tuple([val.cast() for val in maybe_casts])
+        else:
+            return None
+
     def _check_parameters(self):
         """
-        Ensures that the parameters are valid before executing the function.
-        Throws an InvalidParameterLengthException if there as an incorrect number of parameters
-        Throws an InvalidParameterException if parameters are not valid.
+        Ensures that the parameters are valid types before executing the function.
+        Throws InvalidParameterLengthException and InvalidParameterTypeException.
         """
-        # Check if the number of parameters is correct
         param_len = len(self._parameters)
-        param_options = tuple(p for p in self._param_def if len(p) == param_len)
-        if len(param_options) == 0:
-            raise InvalidParameterLengthException(self._param_def, param_len)
+        possible_params = [p for p in self._param_def if len(p) == param_len]
 
-        parse_dict = {}
-        for option in param_options:
-            parse_dict[option] = []
-            for i, p in enumerate(self._parameters):
-                try:
-                    parse_dict[option].append(option[i](self._symbol_table, p).check())
-                except InvalidParameterTypeException as e:
-                    parse_dict[option].append(e)
+        if len(possible_params) == 0:
+            raise InvalidParameterLengthException(self._param_def_to_str(), param_len)
 
-        least_offended = None
-        least_offended_count = None
-        for option, params in parse_dict.items():
-            invalid_count = sum(p for p in params if isinstance(p, InvalidParameterTypeException))
-            if invalid_count == 0:
-                self._parameters = params
-                self._run = self._param_def[option]
+        for types_tuple in possible_params:
+            casted = self._maybe_cast_types(types_tuple)
+            if casted is not None:
+                self._parameters = casted
+                self._run = self._param_def[types_tuple]
                 return
-            if least_offended is None or invalid_count < least_offended_count:
-                least_offended_count = invalid_count
-                least_offended = option
 
-        raise InvalidParameterTypeException(self._parameters, least_offended)
+        raise InvalidParameterTypeException(self._parameters, self._param_def_to_str())

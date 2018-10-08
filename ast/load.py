@@ -1,4 +1,5 @@
 from functionality.exceptions import InvalidFileTypeException
+from functionality.typedef import Image
 from libs import node
 from libs import symbol_table as st
 
