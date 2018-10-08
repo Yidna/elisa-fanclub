@@ -6,7 +6,8 @@ class Draw(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image, Image, Integer, Integer): self._draw
+            (Image, Image, Integer, Integer): self._draw,
+            (Directory, Image, Integer, Integer): Directory.iterate(self._draw)
         }
 
     def _draw(self, u_img, t_img, x, y):

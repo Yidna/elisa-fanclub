@@ -7,7 +7,8 @@ class Brighten(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image, Integer): self._brighten
+            (Image, Integer): self._brighten,
+            (Directory, Integer): Directory.iterate(self._brighten)
         }
 
     def _brighten(self, img, amount):

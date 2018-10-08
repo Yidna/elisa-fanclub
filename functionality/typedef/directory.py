@@ -1,3 +1,4 @@
+from functionality.exceptions import InvalidParameterTypeException
 from functionality.typedef.type import Type
 
 
@@ -20,3 +21,12 @@ class Directory(Type):
 
     def _cast(self):
         return self._symbol_table[self._value].copy()
+
+    @staticmethod
+    def iterate(f):
+        def do(directory, *args):
+            if directory is None or "files" not in directory:
+                raise InvalidParameterTypeException(directory, Directory.__name__)
+            for k, v in directory["files"].items():
+                directory["files"][k] = f(v, *args)
+        return do

@@ -7,7 +7,8 @@ class Tile(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image, Integer, Integer): self._tile
+            (Image, Integer, Integer): self._tile,
+            (Directory, Integer, Integer): Directory.iterate(self._tile)
         }
 
     def _tile(self, img, x, y):

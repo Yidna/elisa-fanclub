@@ -9,7 +9,8 @@ class Darken(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image, Integer): self._darken
+            (Image, Integer): self._darken,
+            (Directory, Integer): Directory.iterate(self._darken)
         }
 
     def _darken(self, img, darken):
