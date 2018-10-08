@@ -16,4 +16,4 @@ show e
 apply tile with 3,5 to bbt,bbt2,bbt3,cat3 as a,b,c,d
 show bbt
 show a
-
+save dir-bbt2 as './images/dir-bbt-output'

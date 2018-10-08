@@ -50,7 +50,7 @@ class Tokenizer:
         :param literal: str
         :return: boolean
         """
-        return self.check_next(literal) and self.get_next()
+        return not self.is_empty() and self.check_next(literal) and self.get_next()
 
     def get_and_check_next(self, literal):
         """
