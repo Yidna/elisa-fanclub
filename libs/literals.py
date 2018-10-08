@@ -1,1 +1,1 @@
-LITERALS = {'load', 'save', 'apply', 'show', 'as', 'to', 'with'}
+LITERALS = {'load', 'save', 'apply', 'show', 'as', 'to', 'with', 'record'}
