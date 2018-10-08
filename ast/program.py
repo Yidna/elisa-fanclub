@@ -23,7 +23,7 @@ class PROGRAM:
     def parse(self):
         while not self.tokenizer.is_empty():
             try:
-                builder = self.FACTORY[self.tokenizer.peek()]
+                builder = PROGRAM.FACTORY[self.tokenizer.peek()]
             except IllegalInputException:
                 raise IllegalInputException('Unsupported program statement type: ' + self.tokenizer.peek())
 

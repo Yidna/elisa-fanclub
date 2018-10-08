@@ -1,8 +1,8 @@
 from functionality.exceptions import IllegalInputException
-from libs import node
-from libs import symbol_table as st
 from libs import func_table as ft
+from libs import node
 from libs import preset_table as pt
+from libs import symbol_table as st
 from libs import utils
 
 
@@ -20,10 +20,10 @@ class APPLY(node.Node):
         if tokenizer.check_next(pt.preset_table):
             self.preset_name = tokenizer.get_next()
         else:
-          try:
-            self.func_name = tokenizer.get_and_check_next(ft.FUNC_TABLE)
-          except IllegalInputException:
-            raise IllegalInputException("Call to unsupported function '{}'.".format(tokenizer.peek()))
+            try:
+                self.func_name = tokenizer.get_and_check_next(ft.FUNC_TABLE)
+            except IllegalInputException:
+                raise IllegalInputException("Call to unsupported function '{}'.".format(tokenizer.peek()))
 
         func = self.func_name if self.func_name else self.preset_name
         print("Parsing {}...".format(func))
@@ -53,6 +53,10 @@ class APPLY(node.Node):
     def evaluate(self):
         res = []
         func_type = ft.FUNC_TABLE.get(self.func_name)
+        print("Applying {} x{}".format(
+            self.func_name if self.func_name else self.preset_name,
+            len(self.to_variables)
+        ))
 
         for idx, to_variable in enumerate(self.to_variables):
             if self.preset_name is None:

@@ -1,10 +1,10 @@
-from functionality.exceptions import InvalidFileTypeException
-from functionality.typedef import Image
-from libs import node
-from libs import symbol_table as st
+import os
 
 import cv2
-import os
+
+from functionality.exceptions import InvalidFileTypeException
+from libs import node
+from libs import symbol_table as st
 
 
 class LOAD(node.Node):
@@ -43,14 +43,17 @@ class LOAD(node.Node):
         if os.path.isfile(self.path):
             st.symbol_table[self.variable] = self.get_img(self.path)
         elif os.path.isdir(self.path):
-            table = {}
+            file_table = {}
             for file in self.get_files():
                 path = None
                 try:
                     path = os.path.join(self.path, file)
-                    table[file] = self.get_img(path)
+                    file_table[file] = self.get_img(path)
                 except InvalidFileTypeException:
                     print("Skipping file {}".format(file if path is None else path))
-            st.symbol_table[self.variable] = table
+            st.symbol_table[self.variable] = {
+                "root": self.path,
+                "files": file_table
+            }
         else:
             raise Exception('Cannot find file path: {}'.format(self.path))

@@ -1,5 +1,6 @@
 from abc import ABC as ABSTRACT_CLASS
 from abc import abstractmethod
+
 from functionality.exceptions.invalid_parameter_type_exception import InvalidParameterTypeException
 
 
