@@ -14,8 +14,8 @@ class APPLY(node.Node):
         'grayscale': Grayscale,
         'resize': Resize,
         # TODO: implement find
-        'crop': Crop
-        # TODO: implement tile
+        'crop': Crop,
+        'tile': Tile
     }
     parameters = []
     to_variables = []
@@ -26,8 +26,11 @@ class APPLY(node.Node):
 
     def parse(self, tokenizer):
         tokenizer.get_and_check_next('apply')
-        self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
-        print("Parsing " + self.func_name + "...")
+        try:
+            self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
+            print("Parsing " + self.func_name + "...")
+        except IllegalInputException:
+            raise IllegalInputException("Call to unsupported function '{}'.".format(tokenizer.peek()))
 
         if tokenizer.maybe_match_next('using'):
             self.using_variable = tokenizer.get_next()
