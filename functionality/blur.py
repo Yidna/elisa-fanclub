@@ -9,13 +9,8 @@ class Blur(FunctionBase):
     def _get_param_def(self):
         return {
             (Image, Integer, Integer): self._blur,
-            (Directory, Integer, Integer): self._blur_all
+            (Directory, Integer, Integer): Directory.iterate(self._blur)
         }
-
-    def _blur_all(self, dir, x, y):
-        for k, v in dir["files"].items():
-            dir["files"][k] = self._blur(v, x, y)
-        return dir
 
     def _blur(self, img, x, y):
         if self._validate_int(x) and self._validate_int(y):

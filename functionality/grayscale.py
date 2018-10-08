@@ -7,7 +7,8 @@ class Grayscale(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image,): self._grayscale
+            (Image,): self._grayscale,
+            (Directory,): Directory.iterate(self._grayscale)
         }
 
     def _grayscale(self, img):

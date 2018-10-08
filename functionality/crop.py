@@ -7,7 +7,8 @@ class Crop(FunctionBase):
 
     def _get_param_def(self):
         return {
-            (Image, Integer, Integer): self._crop
+            (Image, Integer, Integer): self._crop,
+            (Directory, Integer, Integer): Directory.iterate(self._crop)
         }
 
     def _crop(self, img, w, h):

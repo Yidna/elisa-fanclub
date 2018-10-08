@@ -8,7 +8,9 @@ class Resize(FunctionBase):
     def _get_param_def(self):
         return {
             (Image, Integer): self._resize,
-            (Image, Integer, Integer): self._resize
+            (Image, Integer, Integer): self._resize,
+            (Directory, Integer): Directory.iterate(self._resize),
+            (Directory, Integer, Integer): Directory.iterate(self._resize),
         }
 
     def _resize(self, img, x_scale, y_scale=None):
