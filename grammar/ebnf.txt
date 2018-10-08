@@ -1,14 +1,19 @@
-PROGRAM ::= {<load> | <apply> | <show> |  <save>}*
+PROGRAM ::= {<load> | <apply> | <show> |  <save> | <record>}*
 
 <load> ::= 'load' <path> 'as' <variable>
-<path> ::= <string>
-<variable> ::= <string>
 <save> ::= 'save' <variable> 'as' <path>
 <show> ::= 'show' <variable>
-<apply> ::= 'apply' <function> {'as' <variable>}?
 
-<function> ::= <function_name> {'using' <variable>}? 'with' <parameter> 'to' <variable>
+<apply> ::= 'apply' <function> {'as' <variable> {',' <variable>}*}?
+<record> ::= 'record' <function_base> {',' <function_base>}* 'as' <preset>
+
+<function> ::= <function_base> 'to' <variable> {',' <variable>}*
+<function_base> ::= <function_name> {'using' <variable>}? 'with' <parameter>
+<function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur' | 'gray' | <preset>
+
+<path> ::= <string>
+<preset> ::= <string>
+<variable> ::= <string>
 <parameter> ::= <percentage> | <coordinate>
 <percentage> ::= <int>
 <coordinate> ::= <int> ', ' <int>
-<function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur' | 'gray'

@@ -1,4 +1,6 @@
 from functionality.exceptions import IllegalInputException
+from libs.literals import LITERALS
+from libs.func_table import FUNC_TABLE
 
 
 class Tokenizer:
@@ -17,6 +19,7 @@ class Tokenizer:
         :return: void
         """
         self.tokens = [word for line in self.file for word in line.split() if word]
+        print("== TOKENS ==")
         print(self.tokens)
 
     def peek(self):
@@ -47,7 +50,7 @@ class Tokenizer:
         :param literal: str
         :return: boolean
         """
-        return self.check_next(literal) and self.get_next()
+        return not self.is_empty() and self.check_next(literal) and self.get_next()
 
     def get_and_check_next(self, literal):
         """
@@ -61,3 +64,6 @@ class Tokenizer:
 
     def is_empty(self):
         return self.cur >= len(self.tokens)
+
+    def is_next_reserved_keyword(self):
+        return self.peek() in LITERALS or self.peek() in FUNC_TABLE

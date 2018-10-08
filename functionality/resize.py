@@ -7,18 +7,18 @@ class Resize(FunctionBase):
 
     def _get_param_def(self):
         return {
-            2: (Image, Integer),
-            3: (Image, Integer, Integer)
+            (Image, Integer): self._resize,
+            (Image, Integer, Integer): self._resize,
+            (Directory, Integer): Directory.iterate(self._resize),
+            (Directory, Integer, Integer): Directory.iterate(self._resize),
         }
 
-    def _run(self):
-        img_name = self._parameters[0]
-        x_scale = self._parameters[1]
-        y_scale = self._parameters[2] if len(self._parameters) == 2 else x_scale
-        img = self._symbol_table[img_name]
+    def _resize(self, img, x_scale, y_scale=None):
+        if y_scale is None:
+            y_scale = x_scale
 
         y, x = img.shape[:2]
         x, y = x * x_scale // 100, y * y_scale // 100
         img = cv2.resize(img, (x, y), interpolation=cv2.INTER_CUBIC)
-        self._symbol_table[img_name] = img
+
         return img

@@ -6,23 +6,23 @@ class Draw(FunctionBase):
 
     def _get_param_def(self):
         return {
-            4: (Image, Image, Integer, Integer)
+            (Image, Image, Integer, Integer): self._draw,
+            (Image, Directory, Integer, Integer): self._draw_on_all
         }
 
-    def _run(self):
-        u_img_name = self._parameters[0]
-        t_img_name = self._parameters[1]
-        x = self._parameters[2]
-        y = self._parameters[3]
-        u_img = self._symbol_table[u_img_name]
-        t_img = self._symbol_table[t_img_name]
+    def _draw_on_all(self, img, folder, x, y):
+        from copy import deepcopy
+        copy = deepcopy(folder)
+        for k, v in copy["files"].items():
+            copy["files"][k] = self._draw(img, v, x, y)
+        return copy
 
-        if u_img.shape > t_img.shape:
+    def _draw(self, u_img, t_img, x, y):
+        if u_img.shape >= t_img.shape:
             img = u_img
         else:
             x_offset, y_offset, _ = u_img.shape
             t_img[x:x + x_offset, y:y + y_offset] = u_img
             img = t_img
 
-        self._symbol_table[t_img_name] = img
         return img

@@ -1,10 +1,12 @@
 from functionality.typedef.type import Type
+from numpy import ndarray
 
 
 class Image(Type):
 
     def _check(self):
-        return self._value in self._symbol_table
+        value = self._symbol_table[self._value]
+        return value is not None and isinstance(value, ndarray)
 
     def _cast(self):
-        return str(self._value)
+        return self._symbol_table[self._value].copy()

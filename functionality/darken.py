@@ -9,26 +9,25 @@ class Darken(FunctionBase):
 
     def _get_param_def(self):
         return {
-            2: (Image, Integer)
+            (Image, Integer): self._darken,
+            (Directory, Integer): Directory.iterate(self._darken)
         }
 
-    def _run(self):
+    def _darken(self, img, darken):
         """
         When we execute darken, we want to be able to adjust the gamma by 0 <= darken <= 100
         If user provides upper or lower bound we will adjust to the min and max
         :return:
         """
-        img_name, darken = self._parameters[0], self._parameters[1]
         if darken < 0:
             darken = 0
         if darken > 100:
             darken = 100
-        img = self._symbol_table[img_name]
-        img = self.adjust_gamma(img, gamma=np.abs(darken/100 - 1))
-        self._symbol_table[img_name] = img
+        img = self.__adjust_gamma(img, gamma=np.abs(darken / 100 - 1))
+
         return img
 
-    def adjust_gamma(self, img, gamma=1.0):
+    def __adjust_gamma(self, img, gamma=1.0):
         # build a lookup table mapping the pixel values [0, 255] to
         # their adjusted gamma values
         inv_gamma = 1.0 / gamma

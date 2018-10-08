@@ -1,3 +1,4 @@
+from functionality.exceptions import InvalidParameterValueException
 from functionality.function_base import FunctionBase
 from functionality.typedef import *
 import cv2
@@ -7,15 +8,15 @@ class Blur(FunctionBase):
 
     def _get_param_def(self):
         return {
-            3: (Image, Integer, Integer)
+            (Image, Integer, Integer): self._blur,
+            (Directory, Integer, Integer): Directory.iterate(self._blur)
         }
 
-    def _run(self):
-        img_name = self._parameters[0]
-        x = self._parameters[1]
-        y = self._parameters[2]
-        img = self._symbol_table[img_name]
+    def _blur(self, img, x, y):
+        if self._validate_int(x) and self._validate_int(y):
+            img = cv2.GaussianBlur(img, (x, y), 0)
+            return img
+        raise InvalidParameterValueException("Blur parameters must be positive and odd", str((x, y)))
 
-        img = cv2.GaussianBlur(img, (x, y), 0)
-        self._symbol_table[img_name] = img
-        return img
+    @staticmethod
+    def _validate_int(i): return i > 0 and i % 2 == 1
