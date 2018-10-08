@@ -1,4 +1,5 @@
 from functionality.exceptions import IllegalInputException
+from libs.literals import LITERALS
 
 
 class Tokenizer:
@@ -61,3 +62,6 @@ class Tokenizer:
 
     def is_empty(self):
         return self.cur >= len(self.tokens)
+
+    def is_next_reserved_keyword(self):
+        return self.peek() in LITERALS
