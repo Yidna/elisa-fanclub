@@ -4,7 +4,7 @@ from functionality.typedef import *
 
 class Find(FunctionBase):
 
-    def _check_parameters(self):
+    def _get_param_def(self):
         print('got to check params')
         return {
             (Image, Image, Integer): self._find,
