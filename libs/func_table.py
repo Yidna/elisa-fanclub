@@ -7,7 +7,7 @@ FUNC_TABLE = {
     'brighten': Brighten,
     'grayscale': Grayscale,
     'resize': Resize,
-    # TODO: implement find
+    'find': Find,
     'crop': Crop,
     'tile': Tile
 }
