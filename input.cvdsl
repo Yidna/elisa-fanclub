@@ -7,5 +7,19 @@ load './images/0a_cat.bmp' as cat3
 load './images/dir' as dir-bbt
 load './images/pokemon.jpg' as pokemon
 load './images/pikachu_template.jpg' as pikachu
+apply resize with 10 to bbt as bbt4
 
 apply find using pikachu with 5 to pokemon as poke
+show poke
+
+apply resize with 10 to bbt as bbt4
+record darken with 50, draw using bbt4 with 30, 30, resize with 10 as instagram
+apply darken with 30 to bbt,bbt2,bbt3,cat3 as a,b,c,d
+apply grayscale to bbt, bbt2, cat as e,f,g
+apply instagram to dir-bbt as dir-bbt2
+show dir-bbt2
+show e
+apply tile with 3,5 to bbt,bbt2,bbt3,cat3 as a,b,c,d
+show bbt
+show a
+save dir-bbt2 as './images/dir-bbt-output'
