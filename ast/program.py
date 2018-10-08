@@ -24,7 +24,7 @@ class PROGRAM:
         while not self.tokenizer.is_empty():
             try:
                 builder = PROGRAM.FACTORY[self.tokenizer.peek()]
-            except IllegalInputException:
+            except KeyError:
                 raise IllegalInputException('Unsupported program statement type: ' + self.tokenizer.peek())
 
             node = builder()

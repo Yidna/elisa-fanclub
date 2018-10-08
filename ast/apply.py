@@ -53,9 +53,9 @@ class APPLY(node.Node):
     def evaluate(self):
         res = []
         func_type = ft.FUNC_TABLE.get(self.func_name)
-        print("Applying {} x{}".format(
+        print("Applying {} to {}".format(
             self.func_name if self.func_name else self.preset_name,
-            len(self.to_variables)
+            str(self.to_variables).replace("'", "")
         ))
 
         for idx, to_variable in enumerate(self.to_variables):
