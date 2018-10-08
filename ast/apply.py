@@ -46,40 +46,40 @@ class APPLY(node.Node):
         if len(self.as_variables) > 0 and len(self.as_variables) != len(self.to_variables):
             raise IllegalInputException("Cardinality mismatch in AS and TO")
 
-        # print(self.using_variable)
-        # print(self.to_variables)
-        # print(self.as_variables)
+    def _do_preset(self):
+        func_list = pt.preset_table[self.preset_name]
+
+        def fn(to_variable):
+            curr_result = None
+            orig = st.symbol_table[to_variable].copy()
+            for func in func_list:
+                params = self._flatten(func["using"], to_variable, *func["params"])
+                curr_result = self._get_function(func["name"], params).execute()
+                st.symbol_table[to_variable] = curr_result
+            st.symbol_table[to_variable] = orig
+            return curr_result
+        return fn
+
+    def _do_function(self, to_variable):
+        params = self._flatten(self.using_variable, to_variable, *self.parameters)
+        return self._get_function(self.func_name, params).execute()
 
     def evaluate(self):
-        res = []
-        func_type = ft.FUNC_TABLE.get(self.func_name)
+        fn = self._do_preset() if self.preset_name else self._do_function
         print("Applying {} to {}".format(
             self.func_name if self.func_name else self.preset_name,
             str(self.to_variables).replace("'", "")
         ))
 
-        for idx, to_variable in enumerate(self.to_variables):
-            if self.preset_name is None:
-                raw_params = [self.using_variable, to_variable, *self.parameters]
-                params = [p for p in raw_params if p is not None]
-                res.append(func_type(st.symbol_table, params).execute())
-            else:
-                func_list = pt.preset_table[self.preset_name]
-                orig = st.symbol_table[to_variable].copy()
-                curr_result = None
+        for idx, var in enumerate(self.to_variables):
+            modified_img = fn(var)
+            if self.as_variables:
+                st.symbol_table[self.as_variables[idx]] = modified_img
 
-                for func in func_list:
-                    raw_params = [func["using"], to_variable, *func["params"]]
-                    params = [p for p in raw_params if p is not None]
-                    curr_result = ft.FUNC_TABLE[func["name"]](st.symbol_table, params).execute()
-                    st.symbol_table[to_variable] = curr_result
+    @staticmethod
+    def _get_function(name, params):
+        return ft.FUNC_TABLE.get(name)(st.symbol_table, params)
 
-                res.append(curr_result)
-                st.symbol_table[to_variable] = orig
-
-            if len(self.as_variables) == 0:
-                st.symbol_table[to_variable] = res[-1]
-            else:
-                st.symbol_table[self.as_variables[idx]] = res[-1]
-
-        return res
+    @staticmethod
+    def _flatten(*collection):
+        return list(filter(None, collection))
