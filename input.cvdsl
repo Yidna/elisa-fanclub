@@ -4,6 +4,12 @@ load './images/bbt.jpg' as bbt2
 load './images/0a_cat.bmp' as cat2
 load './images/bbt.jpg' as bbt3
 load './images/0a_cat.bmp' as cat3
+apply resize with 10 to bbt as bbt4
+record darken with 50, draw using bbt4 with 30, 30, resize with 10 as instagram
+apply darken with 30 to bbt,bbt2,bbt3,cat3 as a,b,c,d
+apply instagram to bbt, bbt2, cat as e,f,g
+show e
 apply tile with 3,5 to bbt,bbt2,bbt3,cat3 as a,b,c,d
 show bbt
 show a
+

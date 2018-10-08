@@ -1,5 +1,6 @@
 from functionality.exceptions import IllegalInputException
 from libs.literals import LITERALS
+from libs.func_table import FUNC_TABLE
 
 
 class Tokenizer:
@@ -64,4 +65,4 @@ class Tokenizer:
         return self.cur >= len(self.tokens)
 
     def is_next_reserved_keyword(self):
-        return self.peek() in LITERALS
+        return self.peek() in LITERALS or self.peek() in FUNC_TABLE
