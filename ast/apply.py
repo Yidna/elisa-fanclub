@@ -17,15 +17,16 @@ class APPLY(node.Node):
 
     def parse(self, tokenizer):
         tokenizer.get_and_check_next('apply')
-        if tokenizer.peek() in pt.preset_table:
+        if tokenizer.check_next(pt.preset_table):
             self.preset_name = tokenizer.get_next()
         else:
           try:
-            self.func_name = tokenizer.get_and_check_next(self.FUNC_MAP)
+            self.func_name = tokenizer.get_and_check_next(ft.FUNC_TABLE)
           except IllegalInputException:
             raise IllegalInputException("Call to unsupported function '{}'.".format(tokenizer.peek()))
 
-        print("Parsing " + self.func_name if self.func_name else self.preset_name + "...")
+        func = self.func_name if self.func_name else self.preset_name
+        print("Parsing {}...".format(func))
 
         if self.preset_name is None:
             if tokenizer.maybe_match_next('using'):
@@ -51,7 +52,7 @@ class APPLY(node.Node):
 
     def evaluate(self):
         res = []
-        func_type = ft.FUNC_TABLE.get(self.func_name, None)
+        func_type = ft.FUNC_TABLE.get(self.func_name)
 
         for idx, to_variable in enumerate(self.to_variables):
             if self.preset_name is None:

@@ -8,6 +8,6 @@ FUNC_TABLE = {
     'grayscale': Grayscale,
     'resize': Resize,
     # TODO: implement find
-    'crop': Crop
-    # TODO: implement tile
+    'crop': Crop,
+    'tile': Tile
 }
