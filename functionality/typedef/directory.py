@@ -1,5 +1,6 @@
 from functionality.exceptions import InvalidParameterTypeException
 from functionality.typedef.type import Type
+from copy import deepcopy
 
 
 class Directory(Type):
@@ -27,6 +28,8 @@ class Directory(Type):
         def do(directory, *args):
             if directory is None or "files" not in directory:
                 raise InvalidParameterTypeException(directory, Directory.__name__)
-            for k, v in directory["files"].items():
-                directory["files"][k] = f(v, *args)
+            copy = deepcopy(directory)
+            for k, v in copy["files"].items():
+                copy["files"][k] = f(v, *args)
+            return copy
         return do

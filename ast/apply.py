@@ -1,4 +1,5 @@
 from functionality.exceptions import IllegalInputException
+from functionality.typedef import Directory
 from libs import func_table as ft
 from libs import node
 from libs import preset_table as pt
@@ -75,6 +76,8 @@ class APPLY(node.Node):
             modified_img = fn(var)
             if self.as_variables:
                 st.symbol_table[self.as_variables[idx]] = modified_img
+            else:
+                st.symbol_table[var] = modified_img
 
     @staticmethod
     def _get_function(name, params):
