@@ -1,7 +1,7 @@
 from functionality.exceptions import IllegalInputException
+from libs import func_table as ft
 from libs import node
 from libs import preset_table as pt
-from libs import func_table as ft
 from libs import utils
 
 
@@ -34,7 +34,8 @@ class RECORD(node.Node):
         tokenizer.get_and_check_next('as')
         self.name = tokenizer.get_next()
         pt.preset_table[self.name] = self.preset
-        print(self.name, self.preset)
+        prefix = '\n ' + ' ' * len(self.name)
+        print(self.name, prefix.join(map(str, self.preset)))
 
     def evaluate(self):
         pass

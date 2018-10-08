@@ -1,8 +1,10 @@
-from libs import node
-from libs import symbol_table as st
+import os
 
 import cv2
-import os
+
+from functionality.exceptions import InvalidFileTypeException
+from libs import node
+from libs import symbol_table as st
 
 
 class LOAD(node.Node):
@@ -18,15 +20,40 @@ class LOAD(node.Node):
         self.path = tokenizer.get_next().strip('\'\'')
         tokenizer.get_and_check_next('as')
         self.variable = tokenizer.get_next()
-        print(self.path, self.variable)
+
+    def get_files(self):
+        for folder, _, files in os.walk(self.path):
+            # Only retrieves files in the top level
+            if folder == self.path:
+                return files
+
+    def get_img(self, path):
+        path = os.path.normpath(path)
+        img = cv2.imread(path)
+        if img is None:
+            raise InvalidFileTypeException("{} is not an image.".format(path))
+        print("Loaded image: {} as {}".format(path, self.variable))
+        return img
 
     def evaluate(self):
         """
         Evaluates the load node
         :return:
         """
-        if os.path.exists(self.path):
-            img = cv2.imread(self.path)
-            st.symbol_table[self.variable] = img
+        if os.path.isfile(self.path):
+            st.symbol_table[self.variable] = self.get_img(self.path)
+        elif os.path.isdir(self.path):
+            file_table = {}
+            for file in self.get_files():
+                path = None
+                try:
+                    path = os.path.join(self.path, file)
+                    file_table[file] = self.get_img(path)
+                except InvalidFileTypeException:
+                    print("Skipping file {}".format(file if path is None else path))
+            st.symbol_table[self.variable] = {
+                "root": self.path,
+                "files": file_table
+            }
         else:
             raise Exception('Cannot find file path: {}'.format(self.path))

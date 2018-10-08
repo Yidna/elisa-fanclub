@@ -19,6 +19,7 @@ class Tokenizer:
         :return: void
         """
         self.tokens = [word for line in self.file for word in line.split() if word]
+        print("== TOKENS ==")
         print(self.tokens)
 
     def peek(self):
