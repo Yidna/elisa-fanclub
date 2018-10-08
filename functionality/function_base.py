@@ -49,13 +49,13 @@ class FunctionBase:
             for i, p in enumerate(self._parameters):
                 try:
                     parse_dict[option].append(option[i](self._symbol_table, p).check())
-                except InvalidParameterException as e:
+                except InvalidParameterTypeException as e:
                     parse_dict[option].append(e)
 
         least_offended = None
         least_offended_count = None
         for option, params in parse_dict.items():
-            invalid_count = sum(p for p in params if isinstance(p, InvalidParameterException))
+            invalid_count = sum(p for p in params if isinstance(p, InvalidParameterTypeException))
             if invalid_count == 0:
                 self._parameters = params
                 self._run = self._param_def[option]
@@ -64,4 +64,4 @@ class FunctionBase:
                 least_offended_count = invalid_count
                 least_offended = option
 
-        raise InvalidParameterException(self._parameters, least_offended)
+        raise InvalidParameterTypeException(self._parameters, least_offended)
