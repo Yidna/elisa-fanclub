@@ -1,5 +1,4 @@
 from functionality.exceptions import IllegalInputException
-from functionality.typedef import Directory
 from libs import func_table as ft
 from libs import node
 from libs import preset_table as pt

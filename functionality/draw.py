@@ -7,8 +7,15 @@ class Draw(FunctionBase):
     def _get_param_def(self):
         return {
             (Image, Image, Integer, Integer): self._draw,
-            (Directory, Image, Integer, Integer): Directory.iterate(self._draw)
+            (Image, Directory, Integer, Integer): self._draw_on_all
         }
+
+    def _draw_on_all(self, img, folder, x, y):
+        from copy import deepcopy
+        copy = deepcopy(folder)
+        for k, v in copy["files"].items():
+            copy["files"][k] = self._draw(img, v, x, y)
+        return copy
 
     def _draw(self, u_img, t_img, x, y):
         if u_img.shape >= t_img.shape:
