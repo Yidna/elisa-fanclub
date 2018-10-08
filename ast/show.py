@@ -27,6 +27,10 @@ class SHOW(Node):
             raise IllegalInputException("The symbol ({}: {}) cannot be shown.".format(self.variable, symbol))
 
         for img in files:
-            plt.figure()
-            plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-            plt.show()
+            if len(img.shape) == 3:
+                plt.figure()
+                plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+                plt.show()
+            else:
+                plt.figure()
+                plt.imshow(img, cmap='gray')
