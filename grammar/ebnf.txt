@@ -1,7 +1,7 @@
 PROGRAM ::= {<load> | <apply> | <show> |  <save> | <record>}*
 
 <load> ::= 'load' <path> 'as' <variable>
-<save> ::= 'save' <variable> 'as' <path>
+<save> ::= 'save' <variable> {'as' <path>}?
 <show> ::= 'show' <variable>
 
 <apply> ::= 'apply' <function> {'as' <variable> {',' <variable>}*}?
@@ -11,7 +11,9 @@ PROGRAM ::= {<load> | <apply> | <show> |  <save> | <record>}*
 <function_base> ::= <function_name> {'using' <variable>}? 'with' <parameter>
 <function_name> ::= 'darken' | 'brighten' | 'resize' | 'find' | 'draw' | 'hybrid' | 'crop' | 'tile' | 'blur' | 'gray' | <preset>
 
-<path> ::= <string>
+<path> ::= <file> | <folder>
+<file> ::= <string>
+<folder> ::= <string>
 <preset> ::= <string>
 <variable> ::= <string>
 <parameter> ::= <percentage> | <coordinate>
