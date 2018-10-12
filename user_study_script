@@ -51,8 +51,12 @@ Elegance of the language: Narration style with short clips sprinkled / interview
     //                                                                  user testing comments / clips
     //                                                                  self created user clips if necessary
     ease of use -- appropriate to use case -- is it too tricky for your user type. -
+    When designing the grammar we aimed for a language that was simple and easy to learn. We decided to make it very similar to english grammar
+    *insert code snippets or someone reading it*.
     flexibility & expressiveness -- how free is the user in what they say? Can they write programs flexibly. - footage of user face expression
+    In terms of flexibility we restrict the user by the image processing domain as our language strictly deals with image processing.
     regularity -- language looks aesthetically like a single language, not a couple of languages cobbled together - show footage of language being written
+    We created implicit type casting so the user can write as close to english as possible without mixing in syntactic sugar. *insert code here*
 
 
 Difficulty of implementation - interview reminisce with flashes of acted out frustration / happiness
