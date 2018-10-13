@@ -61,8 +61,9 @@ Elegance of the language: Narration style with short clips sprinkled / interview
 
 Difficulty of implementation - interview reminisce with flashes of acted out frustration / happiness
 // TODO: ANDY PROBABLY DOING THIS? WHAT WERE THE ISSUES THAT WE RAN INTO (E.G: DESIGNING A LANGUAGE THAT WAS BOTH STRONG AND FLEXIBLE)
-//      example script: "we found that performing advanced tasks lead to a lot of code replication and overall made the code looks ughly
-//                      and took us a few iterations before we could make something that was both flexible and powerful" *insert a clip of someone
+//      example script: "we found that performing advanced tasks lead to a lot of code replication and overall made the code looks ugly,
+//                       we used factory, strategy, and interpreter design patterns in order to abstract delocalized code so it would be easy to add and change features.
+//                      and took us a few iterations before we could make something that was both flexible and powerful." *insert a clip of someone
 //                         coding ferociously then showing team mate and team mate being like wtf and both angry*
 *P1 interview begins with a "the good ol days" vibe*
 *everytime P1 says something specific on the path (e.g: designing an easy to use grammar was frustarated) act out given emotion
