@@ -34,3 +34,4 @@ class SHOW(Node):
             else:
                 plt.figure()
                 plt.imshow(img, cmap='gray')
+                plt.show()
